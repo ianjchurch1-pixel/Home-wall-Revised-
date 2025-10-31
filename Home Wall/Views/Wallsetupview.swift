@@ -125,11 +125,15 @@ struct WallSetupView: View {
             }
             .fullScreenCover(isPresented: $showRouteMarking) {
                 RouteMarkingView(
-                    wallImage: wallImage,
-                    wallName: wallName,
-                    isPresented: $isPresented
+                    image: wallImage,
+                    existingHolds: [],
+                    onSave: { savedHolds in
+                        // Holds are saved, dismiss the view
+                        showRouteMarking = false
+                    }
                 )
             }
+
         }
     }
 }
