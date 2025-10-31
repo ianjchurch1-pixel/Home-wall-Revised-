@@ -1,10 +1,21 @@
 import SwiftUI
 
 @main
-struct Home_wallApp: App {
+struct Home_WallApp: App {
+    @State private var isLoading = true
+    
     var body: some Scene {
         WindowGroup {
-            MainView()
+            if isLoading {
+                LoadingView()
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            isLoading = false
+                        }
+                    }
+            } else {
+                DashboardView()
+            }
         }
     }
 }
